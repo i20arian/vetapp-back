@@ -1,35 +1,35 @@
 package proyecto.integrador.Veterinaria.service;
 
 import org.springframework.stereotype.Service;
-import proyecto.integrador.Veterinaria.entity.Doctor;
-import proyecto.integrador.Veterinaria.repository.DoctorRepository;
+import proyecto.integrador.Veterinaria.entity.Medico;
+import proyecto.integrador.Veterinaria.repository.MedicoRepository;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class DoctorServiceImpl implements DoctorService {
-  private final DoctorRepository doctorRepository;
+public class MedicoServiceImpl implements MedicoService {
+  private final MedicoRepository doctorRepository;
 
-  public DoctorServiceImpl(DoctorRepository doctorRepository) {
+  public MedicoServiceImpl(MedicoRepository doctorRepository) {
     this.doctorRepository = doctorRepository;
   }
 
   @Override
-  public List<Doctor> getAllDoctores() {
+  public List<Medico> getAllDoctores() {
     return doctorRepository.findAll();
   }
 
   @Override
-  public Doctor insertarDoctor(Doctor doctor) {
+  public Medico insertarDoctor(Medico doctor) {
     return doctorRepository.save(doctor);
   }
 
   @Override
-  public Doctor actualizarDoctor(Integer codigoDoctor, Doctor doctor) {
-    Optional<Doctor> existingDoctor = doctorRepository.findById(codigoDoctor);
+  public Medico actualizarDoctor(Integer codigoDoctor, Medico doctor) {
+    Optional<Medico> existingDoctor = doctorRepository.findById(codigoDoctor);
     if (existingDoctor.isPresent()) {
-      Doctor doctorToUpdate = existingDoctor.get();
+      Medico doctorToUpdate = existingDoctor.get();
       doctorToUpdate.setNombreDoctor(doctor.getNombreDoctor());
       doctorToUpdate.setApellidoDoctor(doctor.getApellidoDoctor());
       doctorToUpdate.setDniDoctor(doctor.getDniDoctor());

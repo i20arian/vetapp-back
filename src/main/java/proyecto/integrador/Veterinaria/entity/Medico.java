@@ -14,7 +14,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Doctor {
+public class Medico {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int codigoDoctor;
