@@ -8,21 +8,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import proyecto.integrador.Veterinaria.entity.LoginRequest;
-import proyecto.integrador.Veterinaria.entity.Usuario;
-import proyecto.integrador.Veterinaria.service.UsuarioService;
+import proyecto.integrador.Veterinaria.entity.Administrador;
+import proyecto.integrador.Veterinaria.service.AdministradorService;
 
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/administradores")
-public class UsuarioController {
+public class AdministradorController {
   @Autowired
-  private UsuarioService usuarioService;
+  private AdministradorService usuarioService;
 
   @PostMapping("/register")
-  public ResponseEntity<?> registrarUsuario(@RequestBody Usuario usuario) {
+  public ResponseEntity<?> registrarUsuario(@RequestBody Administrador usuario) {
     try {
-      Usuario nuevoUsuario = usuarioService.registrarUsuario(usuario);
+      Administrador nuevoUsuario = usuarioService.registrarUsuario(usuario);
       return ResponseEntity.status(HttpStatus.CREATED).body(nuevoUsuario);
     } catch (IllegalArgumentException e) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
@@ -31,7 +31,7 @@ public class UsuarioController {
 
   @PostMapping("/login")
   public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
-    Optional<Usuario> usuario = usuarioService.login(loginRequest.getUsuario(), loginRequest.getPassword());
+    Optional<Administrador> usuario = usuarioService.login(loginRequest.getUsuario(), loginRequest.getPassword());
     if (usuario.isPresent()) {
       return ResponseEntity.ok(usuario.get());
     } else {
