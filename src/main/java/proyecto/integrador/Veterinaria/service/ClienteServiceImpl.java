@@ -33,7 +33,6 @@ public class ClienteServiceImpl implements ClienteService {
       clienteToUpdate.setNombres(cliente.getNombres());
       clienteToUpdate.setApellidos(cliente.getApellidos());
       clienteToUpdate.setDni(cliente.getDni());
-      clienteToUpdate.setInformacionCliente(cliente.getInformacionCliente());
       clienteToUpdate.setGenero(cliente.getGenero());
       return clienteRepository.save(clienteToUpdate); // Guarda los cambios
     } else {

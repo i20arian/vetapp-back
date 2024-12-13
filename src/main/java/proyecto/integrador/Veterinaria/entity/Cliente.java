@@ -23,6 +23,5 @@ public class Cliente {
   private String nombres;
   private String apellidos;
   private int dni;
-  private String informacionCliente;
   private String genero;
 }
