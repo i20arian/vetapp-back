@@ -16,7 +16,6 @@ public class Animales {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long codigoAnimal;
-
   private String nombreAnimal;
   private String dueno;
   private int edad;
