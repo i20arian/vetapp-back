@@ -27,9 +27,9 @@ public class ClienteController {
   @PostMapping("/insertar")
   public ResponseEntity<Cliente> insertarCliente(@RequestBody Cliente cliente) {
     // Verificar que el dniCliente esté disponible como String antes de convertirlo
-    String dniStr = cliente.getDniCliente() + ""; // Convertir a String explícitamente
+    String dniStr = cliente.getDni() + ""; // Convertir a String explícitamente
     int dni = dniStr.isEmpty() ? 0 : Integer.parseInt(dniStr); // Convertir a entero si no está vacío
-    cliente.setDniCliente(dni); // Actualizar el campo dniCliente convertido
+    cliente.setDni(dni); // Actualizar el campo dniCliente convertido
 
     Cliente nuevoCliente = clienteService.insertarCliente(cliente);
     return new ResponseEntity<>(nuevoCliente, HttpStatus.CREATED);

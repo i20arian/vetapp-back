@@ -30,11 +30,11 @@ public class ClienteServiceImpl implements ClienteService {
     Optional<Cliente> existingCliente = clienteRepository.findById(codigoCliente);
     if (existingCliente.isPresent()) {
       Cliente clienteToUpdate = existingCliente.get();
-      clienteToUpdate.setNombreCliente(cliente.getNombreCliente());
-      clienteToUpdate.setApellidosCliente(cliente.getApellidosCliente());
-      clienteToUpdate.setDniCliente(cliente.getDniCliente());
+      clienteToUpdate.setNombres(cliente.getNombres());
+      clienteToUpdate.setApellidos(cliente.getApellidos());
+      clienteToUpdate.setDni(cliente.getDni());
       clienteToUpdate.setInformacionCliente(cliente.getInformacionCliente());
-      clienteToUpdate.setGeneroClie(cliente.getGeneroClie());
+      clienteToUpdate.setGenero(cliente.getGenero());
       return clienteRepository.save(clienteToUpdate); // Guarda los cambios
     } else {
       throw new RuntimeException("Cliente no encontrado con ID: " + codigoCliente);

@@ -19,10 +19,10 @@ import lombok.Setter;
 public class Cliente {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int codigoCliente;
-  private String nombreCliente;
-  private String apellidosCliente;
-  private int dniCliente;
+  private int id;
+  private String nombres;
+  private String apellidos;
+  private int dni;
   private String informacionCliente;
-  private String generoClie;
+  private String genero;
 }
