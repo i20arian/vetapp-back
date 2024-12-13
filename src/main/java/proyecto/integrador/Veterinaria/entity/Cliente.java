@@ -20,14 +20,9 @@ public class Cliente {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int codigoCliente;
-
   private String nombreCliente;
-
   private String apellidosCliente;
-
   private int dniCliente;
-
   private String informacionCliente;
-
   private String generoClie;
 }
