@@ -4,8 +4,16 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class Usuario {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,36 +24,4 @@ public class Usuario {
   private String gmail;
 
   private String password;
-
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
-
-  public String getGmail() {
-    return gmail;
-  }
-
-  public void setGmail(String gmail) {
-    this.gmail = gmail;
-  }
-
-  public String getUsuario() {
-    return usuario;
-  }
-
-  public void setUsuario(String usuario) {
-    this.usuario = usuario;
-  }
-
-  public String getPassword() {
-    return password;
-  }
-
-  public void setPassword(String password) {
-    this.password = password;
-  }
 }
