@@ -12,7 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Animales {
+public class Animal {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long codigoAnimal;
