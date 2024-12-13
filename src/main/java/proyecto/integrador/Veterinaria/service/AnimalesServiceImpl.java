@@ -16,65 +16,61 @@ import java.util.Optional;
 
 @Service
 public class AnimalesServiceImpl implements AnimalesService {
+  private final AnimalesRepository animalesRepository;
 
-    private final AnimalesRepository animalesRepository;
+  @PersistenceContext
+  private EntityManager entityManager;
 
-    @PersistenceContext
-    private EntityManager entityManager;
+  @Autowired
+  public AnimalesServiceImpl(AnimalesRepository animalesRepository) {
+    this.animalesRepository = animalesRepository;
+  }
 
+  @Override
+  public List<Animales> getAllAnimales() {
+    // Obtiene todos los animales desde la base de datos
+    return animalesRepository.findAll();
+  }
 
-    @Autowired
-    public AnimalesServiceImpl(AnimalesRepository animalesRepository) {
-        this.animalesRepository = animalesRepository;
+  @Override
+  public Animales insertarAnimal(Animales animal) {
+    // Inserta un nuevo animal o actualiza uno existente si ya tiene un código
+    return animalesRepository.save(animal);
+  }
+
+  @Override
+  @Transactional
+  public Animales actualizarAnimal(Long id, Animales animal) {
+    Optional<Animales> existingAnimal = animalesRepository.findById(id);
+    if (existingAnimal.isPresent()) {
+      Animales animalToUpdate = existingAnimal.get();
+      // Verificar si la información es la misma o si hubo cambios concurrentes
+      if (animalToUpdate.getCodigoAnimal().equals(animal.getCodigoAnimal())) {
+        animalToUpdate.setNombreAnimal(animal.getNombreAnimal());
+        animalToUpdate.setDueno(animal.getDueno());
+        animalToUpdate.setEdad(animal.getEdad());
+        animalToUpdate.setPeso(animal.getPeso());
+        animalToUpdate.setInformacionAnimal(animal.getInformacionAnimal());
+        animalToUpdate.setGeneroAnim(animal.getGeneroAnim());
+        animalToUpdate.setTipoAnimal(animal.getTipoAnimal());
+        return animalesRepository.save(animalToUpdate);
+      } else {
+        throw new RuntimeException("Animal ha sido modificado por otra transacción");
+      }
+    } else {
+      throw new RuntimeException("Animal no encontrado con ID: " + id);
     }
+  }
 
-    @Override
-    public List<Animales> getAllAnimales() {
-        // Obtiene todos los animales desde la base de datos
-        return animalesRepository.findAll();
+  @Transactional
+  @Override
+  public void eliminarAnimal(Long id) {
+    Optional<Animales> existingAnimal = animalesRepository.findById(id);
+    if (existingAnimal.isPresent()) {
+      // Verificar si el animal no fue eliminado en una transacción previa
+      animalesRepository.deleteById(id);
+    } else {
+      throw new RuntimeException("Animal no encontrado con ID: " + id);
     }
-
-    @Override
-    public Animales insertarAnimal(Animales animal) {
-        // Inserta un nuevo animal o actualiza uno existente si ya tiene un código
-        return animalesRepository.save(animal);
-    }
-
-    @Override
-    @Transactional
-    public Animales actualizarAnimal(Long id, Animales animal) {
-        Optional<Animales> existingAnimal = animalesRepository.findById(id);
-        if (existingAnimal.isPresent()) {
-            Animales animalToUpdate = existingAnimal.get();
-            // Verificar si la información es la misma o si hubo cambios concurrentes
-            if (animalToUpdate.getCodigoAnimal().equals(animal.getCodigoAnimal())) {
-                animalToUpdate.setNombreAnimal(animal.getNombreAnimal());
-                animalToUpdate.setDueno(animal.getDueno());
-                animalToUpdate.setEdad(animal.getEdad());
-                animalToUpdate.setPeso(animal.getPeso());
-                animalToUpdate.setInformacionAnimal(animal.getInformacionAnimal());
-                animalToUpdate.setGeneroAnim(animal.getGeneroAnim());
-                animalToUpdate.setTipoAnimal(animal.getTipoAnimal());
-                return animalesRepository.save(animalToUpdate);
-            } else {
-                throw new RuntimeException("Animal ha sido modificado por otra transacción");
-            }
-        } else {
-            throw new RuntimeException("Animal no encontrado con ID: " + id);
-        }
-    }
-
-
-
-    @Transactional
-    @Override
-    public void eliminarAnimal(Long id) {
-        Optional<Animales> existingAnimal = animalesRepository.findById(id);
-        if (existingAnimal.isPresent()) {
-            // Verificar si el animal no fue eliminado en una transacción previa
-            animalesRepository.deleteById(id);
-        } else {
-            throw new RuntimeException("Animal no encontrado con ID: " + id);
-        }
-    }
+  }
 }

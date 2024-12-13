@@ -14,8 +14,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/doctores")
 public class DoctorController {
-
-
     private final DoctorService doctorService;
 
     @Autowired
@@ -26,9 +24,8 @@ public class DoctorController {
     @GetMapping("/listar")
     public ResponseEntity<List<Doctor>> getAllDoctores() {
         List<Doctor> doctores = doctorService.getAllDoctores();
-        return doctores.isEmpty() ?
-                new ResponseEntity<>(HttpStatus.NO_CONTENT) :
-                new ResponseEntity<>(doctores, HttpStatus.OK);
+        return doctores.isEmpty() ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
+                : new ResponseEntity<>(doctores, HttpStatus.OK);
     }
 
     @PostMapping("/insertar")
@@ -56,6 +53,4 @@ public class DoctorController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-
-
 }

@@ -6,6 +6,4 @@ import proyecto.integrador.Veterinaria.entity.Animales;
 
 @Repository
 public interface AnimalesRepository extends JpaRepository<Animales, Long> {
-
-
 }

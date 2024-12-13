@@ -7,47 +7,45 @@ import jakarta.persistence.Id;
 
 @Entity
 public class Usuario {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
+  private String usuario;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  private String gmail;
 
-    private String usuario;
+  private String password;
 
-    private String gmail;
+  public Long getId() {
+    return id;
+  }
 
-    private String password;
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public Long getId() {
-        return id;
-    }
+  public String getGmail() {
+    return gmail;
+  }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+  public void setGmail(String gmail) {
+    this.gmail = gmail;
+  }
 
-    public String getGmail() {
-        return gmail;
-    }
+  public String getUsuario() {
+    return usuario;
+  }
 
-    public void setGmail(String gmail) {
-        this.gmail = gmail;
-    }
+  public void setUsuario(String usuario) {
+    this.usuario = usuario;
+  }
 
-    public String getUsuario() {
-        return usuario;
-    }
+  public String getPassword() {
+    return password;
+  }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
+  public void setPassword(String password) {
+    this.password = password;
+  }
 }
