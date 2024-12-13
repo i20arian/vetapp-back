@@ -22,7 +22,7 @@ public class AdministradorService {
       throw new IllegalArgumentException("El nombre de usuario ya está registrado");
     }
     // Verificar si el correo ya está registrado
-    if (usuarioRepository.findByGmail(usuario.getGmail()).isPresent()) {
+    if (usuarioRepository.findByGmail(usuario.getCorreo()).isPresent()) {
       throw new IllegalArgumentException("El correo electrónico ya está registrado");
     }
     // Guardar el usuario en la base de datos
