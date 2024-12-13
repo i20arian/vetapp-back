@@ -26,5 +26,7 @@ public interface AnimalService {
 
   Optional<Animal> updateColor(Long id, String color);
 
+  Optional<Animal> findByID(Long id);
+
   boolean delete(Long id);
 }

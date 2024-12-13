@@ -27,5 +27,7 @@ public interface HistoriaClinicaService {
 
   Optional<HistoriaClinica> updateMedico(Long id, Medico medico);
 
+  Optional<HistoriaClinica> findByID(Long id);
+
   boolean delete(Long id);
 }

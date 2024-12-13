@@ -100,6 +100,16 @@ public class HistoriaClinicaController {
     return new ResponseEntity<>(updatedHistoriaClinica.get(), HttpStatus.OK);
   }
 
+  @GetMapping("/encontrar/{id}")
+  public ResponseEntity<HistoriaClinica> findByIDHC(@PathVariable("id") Long id) {
+    Optional<HistoriaClinica> optAni = historiaClinicaService.findByID(id);
+    if (optAni.isEmpty()) {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    return new ResponseEntity<>(optAni.get(), HttpStatus.OK);
+  }
+
   @DeleteMapping("/eliminar/{id}")
   public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
     boolean isDeleted = historiaClinicaService.delete(id);

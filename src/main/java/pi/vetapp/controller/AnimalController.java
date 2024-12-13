@@ -111,6 +111,16 @@ public class AnimalController {
     return new ResponseEntity<>(updatedAnimal.get(), HttpStatus.OK);
   }
 
+  @GetMapping("/encontrar/{id}")
+  public ResponseEntity<Animal> findByIDAni(@PathVariable("id") Long id) {
+    Optional<Animal> optAni = animalService.findByID(id);
+    if (optAni.isEmpty()) {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    return new ResponseEntity<>(optAni.get(), HttpStatus.OK);
+  }
+
   @DeleteMapping("/eliminar/{id}")
   public ResponseEntity<Void> deleteAni(@PathVariable("id") Long id) {
     boolean isDeleted = animalService.delete(id);

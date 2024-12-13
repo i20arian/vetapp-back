@@ -20,5 +20,7 @@ public interface MedicoService {
 
   Optional<Medico> updateDni(Long id, String dni);
 
+  Optional<Medico> findByID(Long id);
+
   boolean delete(Long id);
 }

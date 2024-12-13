@@ -147,6 +147,15 @@ public class AnimalServiceImpl implements AnimalService {
   }
 
   @Override
+  public Optional<Animal> findByID(Long id) {
+    if (id == null) {
+      return Optional.empty();
+    }
+
+    return animalesRepository.findById(id);
+  }
+
+  @Override
   public boolean delete(Long id) {
     if (!animalesRepository.existsById(id)) {
       return false;
