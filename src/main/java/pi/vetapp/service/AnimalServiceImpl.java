@@ -1,11 +1,11 @@
-package proyecto.integrador.Veterinaria.service;
+package pi.vetapp.service;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
-import proyecto.integrador.Veterinaria.entity.Animal;
-import proyecto.integrador.Veterinaria.repository.AnimalRepository;
+import pi.vetapp.entity.Animal;
+import pi.vetapp.repository.AnimalRepository;
 
 import java.util.List;
 import java.util.Optional;

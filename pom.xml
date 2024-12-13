@@ -8,8 +8,8 @@
 		<version>3.4.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>proyecto.integrador</groupId>
-	<artifactId>Veterinaria</artifactId>
+	<groupId>pi</groupId>
+	<artifactId>vetapp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Veterinaria</name>
 	<description>Demo project for Spring Boot</description>

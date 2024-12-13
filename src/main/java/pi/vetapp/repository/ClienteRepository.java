@@ -1,8 +1,8 @@
-package proyecto.integrador.Veterinaria.repository;
+package pi.vetapp.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import proyecto.integrador.Veterinaria.entity.Cliente;
+import pi.vetapp.entity.Cliente;
 
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Integer> {

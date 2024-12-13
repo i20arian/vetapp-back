@@ -1,10 +1,10 @@
-package proyecto.integrador.Veterinaria.controller;
+package pi.vetapp.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import proyecto.integrador.Veterinaria.entity.Animal;
-import proyecto.integrador.Veterinaria.service.AnimalService;
+import pi.vetapp.entity.Animal;
+import pi.vetapp.service.AnimalService;
 
 import java.util.List;
 

@@ -1,8 +1,8 @@
-package proyecto.integrador.Veterinaria.service;
+package pi.vetapp.service;
 
 import org.springframework.stereotype.Service;
-import proyecto.integrador.Veterinaria.entity.Cliente;
-import proyecto.integrador.Veterinaria.repository.ClienteRepository;
+import pi.vetapp.entity.Cliente;
+import pi.vetapp.repository.ClienteRepository;
 
 import java.util.List;
 import java.util.Optional;

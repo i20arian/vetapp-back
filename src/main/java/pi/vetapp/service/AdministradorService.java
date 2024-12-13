@@ -1,9 +1,9 @@
-package proyecto.integrador.Veterinaria.service;
+package pi.vetapp.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import proyecto.integrador.Veterinaria.entity.Administrador;
-import proyecto.integrador.Veterinaria.repository.AdministradorRepository;
+import pi.vetapp.entity.Administrador;
+import pi.vetapp.repository.AdministradorRepository;
 
 import java.util.Optional;
 

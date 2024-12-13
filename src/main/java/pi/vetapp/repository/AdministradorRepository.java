@@ -1,7 +1,7 @@
-package proyecto.integrador.Veterinaria.repository;
+package pi.vetapp.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import proyecto.integrador.Veterinaria.entity.Administrador;
+import pi.vetapp.entity.Administrador;
 
 import java.util.Optional;
 

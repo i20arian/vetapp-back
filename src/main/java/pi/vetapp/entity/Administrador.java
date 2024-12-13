@@ -1,4 +1,4 @@
-package proyecto.integrador.Veterinaria.entity;
+package pi.vetapp.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,13 +14,11 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Medico {
+public class Administrador {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int codigoDoctor;
-  private String nombreDoctor;
-  private String apellidoDoctor;
-  private int dniDoctor;
-  private String especialidad;
-  private String experiencia;
+  private Long id;
+  private String usuario;
+  private String correo;
+  private String password;
 }

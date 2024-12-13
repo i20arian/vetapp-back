@@ -1,4 +1,4 @@
-package proyecto.integrador.Veterinaria.entity;
+package pi.vetapp.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

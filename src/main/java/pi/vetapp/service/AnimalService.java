@@ -1,6 +1,6 @@
-package proyecto.integrador.Veterinaria.service;
+package pi.vetapp.service;
 
-import proyecto.integrador.Veterinaria.entity.Animal;
+import pi.vetapp.entity.Animal;
 
 import java.util.List;
 

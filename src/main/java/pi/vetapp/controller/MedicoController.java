@@ -1,9 +1,9 @@
-package proyecto.integrador.Veterinaria.controller;
+package pi.vetapp.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import proyecto.integrador.Veterinaria.entity.Medico;
-import proyecto.integrador.Veterinaria.service.MedicoService;
+import pi.vetapp.entity.Medico;
+import pi.vetapp.service.MedicoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,4 +1,4 @@
-package proyecto.integrador.Veterinaria.controller;
+package pi.vetapp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import proyecto.integrador.Veterinaria.entity.LoginRequest;
-import proyecto.integrador.Veterinaria.entity.Administrador;
-import proyecto.integrador.Veterinaria.service.AdministradorService;
+import pi.vetapp.entity.LoginRequest;
+import pi.vetapp.entity.Administrador;
+import pi.vetapp.service.AdministradorService;
 
 import java.util.Optional;
 
