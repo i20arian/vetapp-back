@@ -7,48 +7,117 @@ import pi.vetapp.entity.Animal;
 import pi.vetapp.service.AnimalService;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/animales")
 public class AnimalController {
-  private final AnimalService animalesService;
+  private final AnimalService animalService;
 
-  public AnimalController(AnimalService animalesService) {
-    this.animalesService = animalesService;
+  public AnimalController(AnimalService animalService) {
+    this.animalService = animalService;
   }
 
-  // Ruta para obtener todos los animales
   @GetMapping("/listar")
-  public ResponseEntity<List<Animal>> getAllAnimales() {
-    List<Animal> animales = animalesService.getAllAnimales();
+  public ResponseEntity<List<Animal>> getAllAni() {
+    List<Animal> animales = animalService.getAll();
     return animales.isEmpty() ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
         : new ResponseEntity<>(animales, HttpStatus.OK);
   }
 
-  // Ruta para insertar un nuevo animal
   @PostMapping("/insertar")
-  public ResponseEntity<Animal> insertarAnimal(@RequestBody Animal animal) {
-    Animal savedAnimal = animalesService.insertarAnimal(animal);
-    return new ResponseEntity<>(savedAnimal, HttpStatus.CREATED);
+  public ResponseEntity<Animal> createAni(@RequestBody Animal animal) {
+    Animal nuevoAnimal = animalService.create(animal);
+    return new ResponseEntity<>(nuevoAnimal, HttpStatus.CREATED);
   }
 
-  // Ruta para actualizar un animal
-  @PutMapping("/actualizar/{id}")
-  public ResponseEntity<Animal> actualizarAnimal(@PathVariable("id") Long id, @RequestBody Animal animal) {
-    Animal updatedAnimal = animalesService.actualizarAnimal(id, animal);
-    if (updatedAnimal != null) {
-      return new ResponseEntity<>(updatedAnimal, HttpStatus.OK);
+  @PutMapping("/actualizar")
+  public ResponseEntity<Animal> updateAni(@RequestBody Animal animal) {
+    Optional<Animal> updatedAnimal = animalService.update(animal);
+    if (updatedAnimal.isEmpty()) {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-    return new ResponseEntity<>(HttpStatus.NOT_FOUND); // Animal no encontrado
+
+    return new ResponseEntity<>(updatedAnimal.get(), HttpStatus.OK);
+  }
+
+  @PutMapping("/actualizar-nombre/{id}")
+  public ResponseEntity<Animal> updateNombreAni(@PathVariable("id") Long id, @RequestBody String nombre) {
+    Optional<Animal> updatedAnimal = animalService.updateNombre(id, nombre);
+    if (updatedAnimal.isEmpty()) {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    return new ResponseEntity<>(updatedAnimal.get(), HttpStatus.OK);
+  }
+
+  @PutMapping("/actualizar-tipo/{id}")
+  public ResponseEntity<Animal> updateTipoAni(@PathVariable("id") Long id, @RequestBody String tipo) {
+    Optional<Animal> updatedAnimal = animalService.updateTipo(id, tipo);
+    if (updatedAnimal.isEmpty()) {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    return new ResponseEntity<>(updatedAnimal.get(), HttpStatus.OK);
+  }
+
+  @PutMapping("/actualizar-genero/{id}")
+  public ResponseEntity<Animal> updateGeneroAni(@PathVariable("id") Long id, @RequestBody String genero) {
+    Optional<Animal> updatedAnimal = animalService.updateGenero(id, genero);
+    if (updatedAnimal.isEmpty()) {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    return new ResponseEntity<>(updatedAnimal.get(), HttpStatus.OK);
+  }
+
+  @PutMapping("/actualizar-edad/{id}")
+  public ResponseEntity<Animal> updateEdadAni(@PathVariable("id") Long id, @RequestBody Integer edad) {
+    Optional<Animal> updatedAnimal = animalService.updateEdad(id, edad);
+    if (updatedAnimal.isEmpty()) {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    return new ResponseEntity<>(updatedAnimal.get(), HttpStatus.OK);
+  }
+
+  @PutMapping("/actualizar-peso/{id}")
+  public ResponseEntity<Animal> updatePesoAni(@PathVariable("id") Long id, @RequestBody Double peso) {
+    Optional<Animal> updatedAnimal = animalService.updatePeso(id, peso);
+    if (updatedAnimal.isEmpty()) {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    return new ResponseEntity<>(updatedAnimal.get(), HttpStatus.OK);
+  }
+
+  @PutMapping("/actualizar-raza/{id}")
+  public ResponseEntity<Animal> updateRazaAni(@PathVariable("id") Long id, @RequestBody String raza) {
+    Optional<Animal> updatedAnimal = animalService.updateRaza(id, raza);
+    if (updatedAnimal.isEmpty()) {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    return new ResponseEntity<>(updatedAnimal.get(), HttpStatus.OK);
+  }
+
+  @PutMapping("/actualizar-color/{id}")
+  public ResponseEntity<Animal> updateColorAni(@PathVariable("id") Long id, @RequestBody String color) {
+    Optional<Animal> updatedAnimal = animalService.updateColor(id, color);
+    if (updatedAnimal.isEmpty()) {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    return new ResponseEntity<>(updatedAnimal.get(), HttpStatus.OK);
   }
 
   @DeleteMapping("/eliminar/{id}")
-  public ResponseEntity<Void> eliminarAnimal(@PathVariable("id") Long id) {
-    try {
-      animalesService.eliminarAnimal(id);
-      return new ResponseEntity<>(HttpStatus.NO_CONTENT); // Eliminado con éxito
-    } catch (RuntimeException e) {
-      return new ResponseEntity<>(HttpStatus.NOT_FOUND); // Animal no encontrado
+  public ResponseEntity<Void> deleteAni(@PathVariable("id") Long id) {
+    boolean isDeleted = animalService.delete(id);
+    if (!isDeleted) {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
+    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
   }
 }

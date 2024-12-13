@@ -1,8 +1,5 @@
 package pi.vetapp.service;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import pi.vetapp.entity.Animal;
 import pi.vetapp.repository.AnimalRepository;
@@ -14,58 +11,148 @@ import java.util.Optional;
 public class AnimalServiceImpl implements AnimalService {
   private final AnimalRepository animalesRepository;
 
-  @PersistenceContext
-  private EntityManager entityManager;
-
   public AnimalServiceImpl(AnimalRepository animalesRepository) {
     this.animalesRepository = animalesRepository;
   }
 
   @Override
-  public List<Animal> getAllAnimales() {
-    // Obtiene todos los animales desde la base de datos
+  public List<Animal> getAll() {
     return animalesRepository.findAll();
   }
 
   @Override
-  public Animal insertarAnimal(Animal animal) {
-    // Inserta un nuevo animal o actualiza uno existente si ya tiene un código
+  public Animal create(Animal animal) {
     return animalesRepository.save(animal);
   }
 
   @Override
-  @Transactional
-  public Animal actualizarAnimal(Long id, Animal animal) {
-    Optional<Animal> existingAnimal = animalesRepository.findById(id);
-    if (existingAnimal.isPresent()) {
-      Animal animalToUpdate = existingAnimal.get();
-      // Verificar si la información es la misma o si hubo cambios concurrentes
-      if (animalToUpdate.getCodigoAnimal().equals(animal.getCodigoAnimal())) {
-        animalToUpdate.setNombreAnimal(animal.getNombreAnimal());
-        animalToUpdate.setDueno(animal.getDueno());
-        animalToUpdate.setEdad(animal.getEdad());
-        animalToUpdate.setPeso(animal.getPeso());
-        animalToUpdate.setInformacionAnimal(animal.getInformacionAnimal());
-        animalToUpdate.setGeneroAnim(animal.getGeneroAnim());
-        animalToUpdate.setTipoAnimal(animal.getTipoAnimal());
-        return animalesRepository.save(animalToUpdate);
-      } else {
-        throw new RuntimeException("Animal ha sido modificado por otra transacción");
-      }
-    } else {
-      throw new RuntimeException("Animal no encontrado con ID: " + id);
+  public Optional<Animal> update(Animal animal) {
+    if (animal == null || animal.getId() == null) {
+      return Optional.empty();
     }
+
+    return Optional.of(animalesRepository.save(animal));
   }
 
-  @Transactional
   @Override
-  public void eliminarAnimal(Long id) {
-    Optional<Animal> existingAnimal = animalesRepository.findById(id);
-    if (existingAnimal.isPresent()) {
-      // Verificar si el animal no fue eliminado en una transacción previa
-      animalesRepository.deleteById(id);
-    } else {
-      throw new RuntimeException("Animal no encontrado con ID: " + id);
+  public Optional<Animal> updateNombre(Long id, String nombre) {
+    if (id == null || nombre == null) {
+      return Optional.empty();
     }
+
+    Optional<Animal> optAnimal = animalesRepository.findById(id);
+    if (optAnimal.isEmpty()) {
+      return Optional.empty();
+    }
+
+    Animal animal = optAnimal.get();
+    animal.setNombre(nombre);
+    return Optional.of(animalesRepository.save(animal));
+  }
+
+  @Override
+  public Optional<Animal> updateTipo(Long id, String tipo) {
+    if (id == null || tipo == null) {
+      return Optional.empty();
+    }
+
+    Optional<Animal> optAnimal = animalesRepository.findById(id);
+    if (optAnimal.isEmpty()) {
+      return Optional.empty();
+    }
+
+    Animal animal = optAnimal.get();
+    animal.setTipo(tipo);
+    return Optional.of(animalesRepository.save(animal));
+  }
+
+  @Override
+  public Optional<Animal> updateGenero(Long id, String genero) {
+    if (id == null || genero == null) {
+      return Optional.empty();
+    }
+
+    Optional<Animal> optAnimal = animalesRepository.findById(id);
+    if (optAnimal.isEmpty()) {
+      return Optional.empty();
+    }
+
+    Animal animal = optAnimal.get();
+    animal.setGenero(genero);
+    return Optional.of(animalesRepository.save(animal));
+  }
+
+  @Override
+  public Optional<Animal> updateEdad(Long id, Integer edad) {
+    if (id == null || edad == null) {
+      return Optional.empty();
+    }
+
+    Optional<Animal> optAnimal = animalesRepository.findById(id);
+    if (optAnimal.isEmpty()) {
+      return Optional.empty();
+    }
+
+    Animal animal = optAnimal.get();
+    animal.setEdad(edad);
+    return Optional.of(animalesRepository.save(animal));
+  }
+
+  @Override
+  public Optional<Animal> updatePeso(Long id, Double peso) {
+    if (id == null || peso == null) {
+      return Optional.empty();
+    }
+
+    Optional<Animal> optAnimal = animalesRepository.findById(id);
+    if (optAnimal.isEmpty()) {
+      return Optional.empty();
+    }
+
+    Animal animal = optAnimal.get();
+    animal.setPeso(peso);
+    return Optional.of(animalesRepository.save(animal));
+  }
+
+  @Override
+  public Optional<Animal> updateRaza(Long id, String raza) {
+    if (id == null || raza == null) {
+      return Optional.empty();
+    }
+
+    Optional<Animal> optAnimal = animalesRepository.findById(id);
+    if (optAnimal.isEmpty()) {
+      return Optional.empty();
+    }
+
+    Animal animal = optAnimal.get();
+    animal.setRaza(raza);
+    return Optional.of(animalesRepository.save(animal));
+  }
+
+  @Override
+  public Optional<Animal> updateColor(Long id, String color) {
+    if (id == null || color == null) {
+      return Optional.empty();
+    }
+
+    Optional<Animal> optAnimal = animalesRepository.findById(id);
+    if (optAnimal.isEmpty()) {
+      return Optional.empty();
+    }
+
+    Animal animal = optAnimal.get();
+    animal.setColor(color);
+    return Optional.of(animalesRepository.save(animal));
+  }
+
+  @Override
+  public boolean delete(Long id) {
+    if (!animalesRepository.existsById(id)) {
+      return false;
+    }
+
+    animalesRepository.deleteById(id);
+    return true;
   }
 }

@@ -3,17 +3,28 @@ package pi.vetapp.service;
 import pi.vetapp.entity.Animal;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface AnimalService {
-  // Obtener todos los animales
-  List<Animal> getAllAnimales();
+  List<Animal> getAll();
 
-  // Insertar un nuevo animal
-  Animal insertarAnimal(Animal animal);
+  Animal create(Animal animal);
 
-  // Actualizar un animal
-  Animal actualizarAnimal(Long id, Animal animal);
+  Optional<Animal> update(Animal animal);
 
-  // Eliminar un animal
-  void eliminarAnimal(Long id);
+  Optional<Animal> updateNombre(Long id, String nombre);
+
+  Optional<Animal> updateTipo(Long id, String tipo);
+
+  Optional<Animal> updateGenero(Long id, String genero);
+
+  Optional<Animal> updateEdad(Long id, Integer edad);
+
+  Optional<Animal> updatePeso(Long id, Double peso);
+
+  Optional<Animal> updateRaza(Long id, String raza);
+
+  Optional<Animal> updateColor(Long id, String color);
+
+  boolean delete(Long id);
 }
