@@ -16,33 +16,93 @@ public class MedicoServiceImpl implements MedicoService {
   }
 
   @Override
-  public List<Medico> getAllDoctores() {
+  public List<Medico> getAll() {
     return doctorRepository.findAll();
   }
 
   @Override
-  public Medico insertarDoctor(Medico doctor) {
-    return doctorRepository.save(doctor);
+  public Medico create(Medico medico) {
+    return doctorRepository.save(medico);
   }
 
   @Override
-  public Medico actualizarDoctor(Integer codigoDoctor, Medico doctor) {
-    Optional<Medico> existingDoctor = doctorRepository.findById(codigoDoctor);
-    if (existingDoctor.isPresent()) {
-      Medico doctorToUpdate = existingDoctor.get();
-      doctorToUpdate.setNombreDoctor(doctor.getNombreDoctor());
-      doctorToUpdate.setApellidoDoctor(doctor.getApellidoDoctor());
-      doctorToUpdate.setDniDoctor(doctor.getDniDoctor());
-      doctorToUpdate.setEspecialidad(doctor.getEspecialidad());
-      doctorToUpdate.setExperiencia(doctor.getExperiencia());
-      return doctorRepository.save(doctorToUpdate);
-    } else {
-      throw new RuntimeException("Doctor no encontrado con el ID: " + codigoDoctor);
+  public Optional<Medico> update(Medico medico) {
+    if (medico == null || medico.getId() == null) {
+      return Optional.empty();
     }
+    return Optional.of(doctorRepository.save(medico));
   }
 
   @Override
-  public void eliminarDoctor(Integer codigoDoctor) {
-    doctorRepository.deleteById(codigoDoctor);
+  public Optional<Medico> updateNombres(Long id, String nombres) {
+    if (id == null || nombres == null) {
+      return Optional.empty();
+    }
+
+    Optional<Medico> optMedico = doctorRepository.findById(id);
+    if (optMedico.isEmpty()) {
+      return Optional.empty();
+    }
+
+    Medico medico = optMedico.get();
+    medico.setNombres(nombres);
+    return Optional.of(doctorRepository.save(medico));
+  }
+
+  @Override
+  public Optional<Medico> updateApellidos(Long id, String apellidos) {
+    if (id == null || apellidos == null) {
+      return Optional.empty();
+    }
+
+    Optional<Medico> optMedico = doctorRepository.findById(id);
+    if (optMedico.isEmpty()) {
+      return Optional.empty();
+    }
+
+    Medico medico = optMedico.get();
+    medico.setApellidos(apellidos);
+    return Optional.of(doctorRepository.save(medico));
+  }
+
+  @Override
+  public Optional<Medico> updateEspecialidad(Long id, String especialidad) {
+    if (id == null || especialidad == null) {
+      return Optional.empty();
+    }
+
+    Optional<Medico> optMedico = doctorRepository.findById(id);
+    if (optMedico.isEmpty()) {
+      return Optional.empty();
+    }
+
+    Medico medico = optMedico.get();
+    medico.setEspecialidad(especialidad);
+    return Optional.of(doctorRepository.save(medico));
+  }
+
+  @Override
+  public Optional<Medico> updateDni(Long id, String dni) {
+    if (id == null || dni == null) {
+      return Optional.empty();
+    }
+
+    Optional<Medico> optMedico = doctorRepository.findById(id);
+    if (optMedico.isEmpty()) {
+      return Optional.empty();
+    }
+
+    Medico medico = optMedico.get();
+    medico.setDni(dni);
+    return Optional.of(doctorRepository.save(medico));
+  }
+
+  @Override
+  public boolean delete(Long id) {
+    if (!doctorRepository.existsById(id)) {
+      return false;
+    }
+    doctorRepository.deleteById(id);
+    return true;
   }
 }

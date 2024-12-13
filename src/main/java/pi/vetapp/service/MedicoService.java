@@ -3,13 +3,22 @@ package pi.vetapp.service;
 import pi.vetapp.entity.Medico;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface MedicoService {
-  List<Medico> getAllDoctores();
+  List<Medico> getAll();
 
-  Medico insertarDoctor(Medico doctor);
+  Medico create(Medico medico);
 
-  Medico actualizarDoctor(Integer codigoDoctor, Medico doctor);
+  Optional<Medico> update(Medico medico);
 
-  void eliminarDoctor(Integer codigoDoctor);
+  Optional<Medico> updateNombres(Long id, String nombres);
+
+  Optional<Medico> updateApellidos(Long id, String apellidos);
+
+  Optional<Medico> updateEspecialidad(Long id, String especialidad);
+
+  Optional<Medico> updateDni(Long id, String dni);
+
+  boolean delete(Long id);
 }

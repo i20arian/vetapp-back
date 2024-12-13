@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import pi.vetapp.entity.Medico;
 
 @Repository
-public interface MedicoRepository extends JpaRepository<Medico, Integer> {
+public interface MedicoRepository extends JpaRepository<Medico, Long> {
 }
