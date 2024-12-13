@@ -1,16 +1,13 @@
 package proyecto.integrador.Veterinaria.service;
 
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 import proyecto.integrador.Veterinaria.entity.Animales;
 import proyecto.integrador.Veterinaria.repository.AnimalesRepository;
 
-import java.util.ConcurrentModificationException;
 import java.util.List;
 import java.util.Optional;
 
