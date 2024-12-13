@@ -19,7 +19,7 @@ import lombok.Setter;
 public class Cliente {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int id;
+  private Long id;
   private String nombres;
   private String apellidos;
   private int dni;
