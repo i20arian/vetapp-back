@@ -49,9 +49,6 @@ public class Cliente {
   @Column(name = "direccion_cli", length = 256)
   private String direccion;
 
-  @OneToMany(mappedBy = "duenio", cascade = CascadeType.ALL, orphanRemoval = true)
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
   private List<Animal> animales = new ArrayList<>();
-
-  @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
-  private List<HistoriaClinica> historiasClinicas = new ArrayList<>();
 }
