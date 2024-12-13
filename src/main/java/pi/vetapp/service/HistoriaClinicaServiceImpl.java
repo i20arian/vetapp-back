@@ -121,6 +121,15 @@ public class HistoriaClinicaServiceImpl implements HistoriaClinicaService {
   }
 
   @Override
+  public Optional<HistoriaClinica> findByID(Long id) {
+    if (id == null) {
+      return Optional.empty();
+    }
+
+    return historiaClinicaRepository.findById(id);
+  }
+
+  @Override
   public boolean delete(Long id) {
     if (!historiaClinicaRepository.existsById(id)) {
       return false;
