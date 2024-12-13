@@ -16,36 +16,143 @@ public class ClienteServiceImpl implements ClienteService {
   }
 
   @Override
-  public List<Cliente> getAllClientes() {
-    return clienteRepository.findAll(); // Obtiene todos los clientes
+  public List<Cliente> getAll() {
+    return clienteRepository.findAll();
   }
 
   @Override
-  public Cliente insertarCliente(Cliente cliente) {
-    return clienteRepository.save(cliente); // Inserta un nuevo cliente
+  public Cliente create(Cliente cliente) {
+    return clienteRepository.save(cliente);
   }
 
   @Override
-  public Cliente actualizarCliente(Long codigoCliente, Cliente cliente) {
-    Optional<Cliente> existingCliente = clienteRepository.findById(codigoCliente);
-    if (existingCliente.isPresent()) {
-      Cliente clienteToUpdate = existingCliente.get();
-      clienteToUpdate.setNombres(cliente.getNombres());
-      clienteToUpdate.setApellidos(cliente.getApellidos());
-      clienteToUpdate.setDni(cliente.getDni());
-      clienteToUpdate.setGenero(cliente.getGenero());
-      return clienteRepository.save(clienteToUpdate); // Guarda los cambios
-    } else {
-      throw new RuntimeException("Cliente no encontrado con ID: " + codigoCliente);
+  public Optional<Cliente> update(Cliente cliente) {
+    if (cliente == null || cliente.getId() == null) {
+      return Optional.empty();
     }
+
+    return Optional.of(clienteRepository.save(cliente));
   }
 
   @Override
-  public void eliminarCliente(Long codigoCliente) {
-    if (clienteRepository.existsById(codigoCliente)) {
-      clienteRepository.deleteById(codigoCliente); // Elimina el cliente
-    } else {
-      throw new RuntimeException("Cliente no encontrado con ID: " + codigoCliente);
+  public Optional<Cliente> updateNombres(Long id, String nombres) {
+    if (id == null || nombres == null) {
+      return Optional.empty();
     }
+
+    Optional<Cliente> optCli = clienteRepository.findById(id);
+    if (optCli.isEmpty()) {
+      return Optional.empty();
+    }
+
+    Cliente cliente = optCli.get();
+    cliente.setNombres(nombres);
+    return Optional.of(clienteRepository.save(cliente));
+  }
+
+  @Override
+  public Optional<Cliente> updateApellidos(Long id, String apellidos) {
+    if (id == null || apellidos == null) {
+      return Optional.empty();
+    }
+
+    Optional<Cliente> optCli = clienteRepository.findById(id);
+    if (optCli.isEmpty()) {
+      return Optional.empty();
+    }
+
+    Cliente cliente = optCli.get();
+    cliente.setApellidos(apellidos);
+    return Optional.of(clienteRepository.save(cliente));
+  }
+
+  @Override
+  public Optional<Cliente> updateDni(Long id, String dni) {
+    if (id == null || dni == null) {
+      return Optional.empty();
+    }
+
+    Optional<Cliente> optCli = clienteRepository.findById(id);
+    if (optCli.isEmpty()) {
+      return Optional.empty();
+    }
+
+    Cliente cliente = optCli.get();
+    cliente.setDni(dni);
+    return Optional.of(clienteRepository.save(cliente));
+  }
+
+  @Override
+  public Optional<Cliente> updateGenero(Long id, String genero) {
+    if (id == null || genero == null) {
+      return Optional.empty();
+    }
+
+    Optional<Cliente> optCli = clienteRepository.findById(id);
+    if (optCli.isEmpty()) {
+      return Optional.empty();
+    }
+
+    Cliente cliente = optCli.get();
+    cliente.setGenero(genero);
+    return Optional.of(clienteRepository.save(cliente));
+  }
+
+  @Override
+  public Optional<Cliente> updateCorreo(Long id, String correo) {
+    if (id == null || correo == null) {
+      return Optional.empty();
+    }
+
+    Optional<Cliente> optCli = clienteRepository.findById(id);
+    if (optCli.isEmpty()) {
+      return Optional.empty();
+    }
+
+    Cliente cliente = optCli.get();
+    cliente.setCorreo(correo);
+    return Optional.of(clienteRepository.save(cliente));
+  }
+
+  @Override
+  public Optional<Cliente> updateCelular(Long id, String celular) {
+    if (id == null || celular == null) {
+      return Optional.empty();
+    }
+
+    Optional<Cliente> optCli = clienteRepository.findById(id);
+    if (optCli.isEmpty()) {
+      return Optional.empty();
+    }
+
+    Cliente cliente = optCli.get();
+    cliente.setCelular(celular);
+    return Optional.of(clienteRepository.save(cliente));
+  }
+
+  @Override
+  public Optional<Cliente> updateDireccion(Long id, String direccion) {
+    if (id == null || direccion == null) {
+      return Optional.empty();
+    }
+
+    Optional<Cliente> optCli = clienteRepository.findById(id);
+    if (optCli.isEmpty()) {
+      return Optional.empty();
+    }
+
+    Cliente cliente = optCli.get();
+    cliente.setDireccion(direccion);
+    return Optional.of(clienteRepository.save(cliente));
+  }
+
+  @Override
+  public boolean delete(Long id) {
+    if (!clienteRepository.existsById(id)) {
+      return false;
+    }
+
+    clienteRepository.deleteById(id);
+    return true;
   }
 }

@@ -7,6 +7,7 @@ import pi.vetapp.entity.Cliente;
 import pi.vetapp.service.ClienteService;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/clientes")
@@ -18,35 +19,105 @@ public class ClienteController {
   }
 
   @GetMapping("/listar")
-  public ResponseEntity<List<Cliente>> getAllClientes() {
-    List<Cliente> clientes = clienteService.getAllClientes();
+  public ResponseEntity<List<Cliente>> getAllCli() {
+    List<Cliente> clientes = clienteService.getAll();
     return clientes.isEmpty() ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
         : new ResponseEntity<>(clientes, HttpStatus.OK);
   }
 
   @PostMapping("/insertar")
-  public ResponseEntity<Cliente> insertarCliente(@RequestBody Cliente cliente) {
-    Cliente nuevoCliente = clienteService.insertarCliente(cliente);
+  public ResponseEntity<Cliente> createCli(@RequestBody Cliente cliente) {
+    Cliente nuevoCliente = clienteService.create(cliente);
     return new ResponseEntity<>(nuevoCliente, HttpStatus.CREATED);
   }
 
-  @PutMapping("/actualizar/{id}")
-  public ResponseEntity<Cliente> actualizarCliente(@PathVariable("id") Long id, @RequestBody Cliente cliente) {
-    try {
-      Cliente clienteActualizado = clienteService.actualizarCliente(id, cliente);
-      return new ResponseEntity<>(clienteActualizado, HttpStatus.OK);
-    } catch (RuntimeException e) {
+  @PutMapping("/actualizar")
+  public ResponseEntity<Cliente> updateCli(@RequestBody Cliente cliente) {
+    Optional<Cliente> optCli = clienteService.update(cliente);
+    if (optCli.isEmpty()) {
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
+    return new ResponseEntity<>(optCli.get(), HttpStatus.OK);
+  }
+
+  @PutMapping("/actualizar-nombres/{id}")
+  public ResponseEntity<Cliente> updateNombresCli(@PathVariable("id") Long id, @RequestBody String nombres) {
+    Optional<Cliente> optCli = clienteService.updateNombres(id, nombres);
+    if (optCli.isEmpty()) {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    return new ResponseEntity<>(optCli.get(), HttpStatus.OK);
+  }
+
+  @PutMapping("/actualizar-apellidos/{id}")
+  public ResponseEntity<Cliente> updateApellidosCli(@PathVariable("id") Long id, @RequestBody String apellidos) {
+    Optional<Cliente> optCli = clienteService.updateApellidos(id, apellidos);
+    if (optCli.isEmpty()) {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    return new ResponseEntity<>(optCli.get(), HttpStatus.OK);
+  }
+
+  @PutMapping("/actualizar-dni/{id}")
+  public ResponseEntity<Cliente> updateDniCli(@PathVariable("id") Long id, @RequestBody String dni) {
+    Optional<Cliente> optCli = clienteService.updateDni(id, dni);
+    if (optCli.isEmpty()) {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    return new ResponseEntity<>(optCli.get(), HttpStatus.OK);
+  }
+
+  @PutMapping("/actualizar-genero/{id}")
+  public ResponseEntity<Cliente> updateGeneroCli(@PathVariable("id") Long id, @RequestBody String genero) {
+    Optional<Cliente> optCli = clienteService.updateGenero(id, genero);
+    if (optCli.isEmpty()) {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    return new ResponseEntity<>(optCli.get(), HttpStatus.OK);
+  }
+
+  @PutMapping("/actualizar-correo/{id}")
+  public ResponseEntity<Cliente> updateCorreoCli(@PathVariable("id") Long id, @RequestBody String correo) {
+    Optional<Cliente> optCli = clienteService.updateCorreo(id, correo);
+    if (optCli.isEmpty()) {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    return new ResponseEntity<>(optCli.get(), HttpStatus.OK);
+  }
+
+  @PutMapping("/actualizar-celular/{id}")
+  public ResponseEntity<Cliente> updateCelularCli(@PathVariable("id") Long id, @RequestBody String celular) {
+    Optional<Cliente> optCli = clienteService.updateCelular(id, celular);
+    if (optCli.isEmpty()) {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    return new ResponseEntity<>(optCli.get(), HttpStatus.OK);
+  }
+
+  @PutMapping("/actualizar-direccion/{id}")
+  public ResponseEntity<Cliente> updateDireccionCli(@PathVariable("id") Long id, @RequestBody String direccion) {
+    Optional<Cliente> optCli = clienteService.updateDireccion(id, direccion);
+    if (optCli.isEmpty()) {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    return new ResponseEntity<>(optCli.get(), HttpStatus.OK);
   }
 
   @DeleteMapping("/eliminar/{id}")
-  public ResponseEntity<Void> eliminarCliente(@PathVariable("id") Long id) {
-    try {
-      clienteService.eliminarCliente(id);
-      return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    } catch (RuntimeException e) {
+  public ResponseEntity<Void> deleteCli(@PathVariable("id") Long id) {
+    boolean isDeleted = clienteService.delete(id);
+    if (!isDeleted) {
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
+    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
   }
 }
