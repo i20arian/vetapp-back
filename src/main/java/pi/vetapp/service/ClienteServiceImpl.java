@@ -26,7 +26,7 @@ public class ClienteServiceImpl implements ClienteService {
   }
 
   @Override
-  public Cliente actualizarCliente(int codigoCliente, Cliente cliente) {
+  public Cliente actualizarCliente(Long codigoCliente, Cliente cliente) {
     Optional<Cliente> existingCliente = clienteRepository.findById(codigoCliente);
     if (existingCliente.isPresent()) {
       Cliente clienteToUpdate = existingCliente.get();
@@ -41,7 +41,7 @@ public class ClienteServiceImpl implements ClienteService {
   }
 
   @Override
-  public void eliminarCliente(int codigoCliente) {
+  public void eliminarCliente(Long codigoCliente) {
     if (clienteRepository.existsById(codigoCliente)) {
       clienteRepository.deleteById(codigoCliente); // Elimina el cliente
     } else {

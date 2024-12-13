@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import pi.vetapp.entity.Cliente;
 
 @Repository
-public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
+public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 }

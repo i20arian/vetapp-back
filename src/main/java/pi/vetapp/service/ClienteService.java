@@ -9,7 +9,7 @@ public interface ClienteService {
 
   Cliente insertarCliente(Cliente cliente);
 
-  Cliente actualizarCliente(int codigoCliente, Cliente cliente);
+  Cliente actualizarCliente(Long codigoCliente, Cliente cliente);
 
-  void eliminarCliente(int codigoCliente);
+  void eliminarCliente(Long codigoCliente);
 }
