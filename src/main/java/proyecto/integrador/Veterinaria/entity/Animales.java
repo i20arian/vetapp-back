@@ -15,7 +15,7 @@ import lombok.Setter;
 public class Animales {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long codigoAnimal; // ID del animal, se usa Long si es autoincrementable
+  private Long codigoAnimal;
 
   private String nombreAnimal;
   private String dueno;
