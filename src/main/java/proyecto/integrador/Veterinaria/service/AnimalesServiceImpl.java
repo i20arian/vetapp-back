@@ -3,7 +3,6 @@ package proyecto.integrador.Veterinaria.service;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import proyecto.integrador.Veterinaria.entity.Animales;
 import proyecto.integrador.Veterinaria.repository.AnimalesRepository;
@@ -18,7 +17,6 @@ public class AnimalesServiceImpl implements AnimalesService {
   @PersistenceContext
   private EntityManager entityManager;
 
-  @Autowired
   public AnimalesServiceImpl(AnimalesRepository animalesRepository) {
     this.animalesRepository = animalesRepository;
   }

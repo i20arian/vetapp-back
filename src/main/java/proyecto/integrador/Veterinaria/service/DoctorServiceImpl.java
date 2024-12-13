@@ -1,6 +1,5 @@
 package proyecto.integrador.Veterinaria.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import proyecto.integrador.Veterinaria.entity.Doctor;
 import proyecto.integrador.Veterinaria.repository.DoctorRepository;
@@ -12,7 +11,6 @@ import java.util.Optional;
 public class DoctorServiceImpl implements DoctorService {
   private final DoctorRepository doctorRepository;
 
-  @Autowired
   public DoctorServiceImpl(DoctorRepository doctorRepository) {
     this.doctorRepository = doctorRepository;
   }

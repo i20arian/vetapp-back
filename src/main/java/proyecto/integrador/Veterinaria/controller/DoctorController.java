@@ -1,6 +1,5 @@
 package proyecto.integrador.Veterinaria.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import proyecto.integrador.Veterinaria.entity.Doctor;
@@ -16,7 +15,6 @@ import java.util.List;
 public class DoctorController {
     private final DoctorService doctorService;
 
-    @Autowired
     public DoctorController(DoctorService doctorService) {
         this.doctorService = doctorService;
     }
