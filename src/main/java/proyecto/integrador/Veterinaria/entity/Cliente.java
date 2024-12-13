@@ -22,6 +22,6 @@ public class Cliente {
   private Long id;
   private String nombres;
   private String apellidos;
-  private int dni;
+  private String dni;
   private String genero;
 }
