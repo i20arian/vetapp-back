@@ -1,6 +1,7 @@
 package pi.vetapp.service;
 
 import org.springframework.stereotype.Service;
+
 import pi.vetapp.entity.Medico;
 import pi.vetapp.repository.MedicoRepository;
 
@@ -95,6 +96,15 @@ public class MedicoServiceImpl implements MedicoService {
     Medico medico = optMedico.get();
     medico.setDni(dni);
     return Optional.of(doctorRepository.save(medico));
+  }
+
+  @Override
+  public Optional<Medico> findByID(Long id) {
+    if (id == null) {
+      return Optional.empty();
+    }
+
+    return doctorRepository.findById(id);
   }
 
   @Override

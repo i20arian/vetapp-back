@@ -3,6 +3,7 @@ package pi.vetapp.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import pi.vetapp.entity.Medico;
 import pi.vetapp.service.MedicoService;
 
@@ -80,6 +81,16 @@ public class MedicoController {
     }
 
     return new ResponseEntity<>(updatedMedico.get(), HttpStatus.OK);
+  }
+
+  @GetMapping("/encontrar/{id}")
+  public ResponseEntity<Medico> findByIDMed(@PathVariable("id") Long id) {
+    Optional<Medico> optAni = medicoService.findByID(id);
+    if (optAni.isEmpty()) {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    return new ResponseEntity<>(optAni.get(), HttpStatus.OK);
   }
 
   @DeleteMapping("/eliminar/{id}")
