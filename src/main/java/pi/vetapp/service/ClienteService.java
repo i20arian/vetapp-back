@@ -26,5 +26,7 @@ public interface ClienteService {
 
   Optional<Cliente> updateDireccion(Long id, String direccion);
 
+  Optional<Cliente> findByID(Long id);
+
   boolean delete(Long id);
 }

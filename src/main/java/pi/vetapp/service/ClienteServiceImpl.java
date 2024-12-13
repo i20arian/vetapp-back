@@ -1,6 +1,7 @@
 package pi.vetapp.service;
 
 import org.springframework.stereotype.Service;
+
 import pi.vetapp.entity.Cliente;
 import pi.vetapp.repository.ClienteRepository;
 
@@ -144,6 +145,15 @@ public class ClienteServiceImpl implements ClienteService {
     Cliente cliente = optCli.get();
     cliente.setDireccion(direccion);
     return Optional.of(clienteRepository.save(cliente));
+  }
+
+  @Override
+  public Optional<Cliente> findByID(Long id) {
+    if (id == null) {
+      return Optional.empty();
+    }
+
+    return clienteRepository.findById(id);
   }
 
   @Override

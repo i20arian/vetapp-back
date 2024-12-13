@@ -3,6 +3,7 @@ package pi.vetapp.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import pi.vetapp.entity.Cliente;
 import pi.vetapp.service.ClienteService;
 
@@ -109,6 +110,16 @@ public class ClienteController {
     }
 
     return new ResponseEntity<>(optCli.get(), HttpStatus.OK);
+  }
+
+  @GetMapping("/encontrar/{id}")
+  public ResponseEntity<Cliente> findByIDCli(@PathVariable("id") Long id) {
+    Optional<Cliente> optAni = clienteService.findByID(id);
+    if (optAni.isEmpty()) {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    return new ResponseEntity<>(optAni.get(), HttpStatus.OK);
   }
 
   @DeleteMapping("/eliminar/{id}")
