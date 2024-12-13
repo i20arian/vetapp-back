@@ -1,8 +1,5 @@
 package pi.vetapp.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -41,11 +38,4 @@ public class Animal {
 
   @Column(name = "color_ani", length = 32)
   private String color;
-
-  @ManyToOne
-  @JoinColumn(name = "id_cli", nullable = false) // Relación con Cliente (dueño)
-  private Cliente duenio;
-
-  @OneToMany(mappedBy = "animal", cascade = CascadeType.ALL, orphanRemoval = true)
-  private List<HistoriaClinica> historiasClinicas = new ArrayList<>();
 }

@@ -1,15 +1,10 @@
 package pi.vetapp.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -39,7 +34,4 @@ public class Medico {
 
   @Column(name = "especialidad_med", nullable = false, length = 64)
   private String especialidad;
-
-  @OneToMany(mappedBy = "medico", cascade = CascadeType.ALL, orphanRemoval = true)
-  private List<HistoriaClinica> historiasClinicas = new ArrayList<>();
 }
