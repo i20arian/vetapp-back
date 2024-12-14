@@ -29,4 +29,20 @@ public interface AnimalService {
   Optional<Animal> findByID(Long id);
 
   boolean delete(Long id);
+
+  List<Animal> findByNombre(String nombre);
+
+  List<Animal> findByTipo(String tipo);
+
+  List<Animal> findByGenero(String genero);
+
+  List<Animal> findByEdad(Integer edad);
+
+  List<Animal> findByPeso(Double peso);
+
+  List<Animal> findByRaza(String raza);
+
+  List<Animal> findByColor(String color);
+
+  List<Animal> findByClienteId(Long clienteId);
 }
