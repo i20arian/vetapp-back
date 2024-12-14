@@ -165,4 +165,39 @@ public class ClienteServiceImpl implements ClienteService {
     clienteRepository.deleteById(id);
     return true;
   }
+
+  @Override
+  public Optional<Cliente> findByDni(String dni) {
+    return dni == null ? Optional.empty() : clienteRepository.findByDni(dni);
+  }
+
+  @Override
+  public Optional<Cliente> findByCorreo(String correo) {
+    return correo == null ? Optional.empty() : clienteRepository.findByCorreo(correo);
+  }
+
+  @Override
+  public List<Cliente> findByNombres(String nombres) {
+    return nombres == null ? List.of() : clienteRepository.findByNombresContainingIgnoreCase(nombres);
+  }
+
+  @Override
+  public List<Cliente> findByApellidos(String apellidos) {
+    return apellidos == null ? List.of() : clienteRepository.findByApellidosContainingIgnoreCase(apellidos);
+  }
+
+  @Override
+  public List<Cliente> findByGenero(String genero) {
+    return genero == null ? List.of() : clienteRepository.findByGeneroContainingIgnoreCase(genero);
+  }
+
+  @Override
+  public List<Cliente> findByDireccion(String direccion) {
+    return direccion == null ? List.of() : clienteRepository.findByDireccionContainingIgnoreCase(direccion);
+  }
+
+  @Override
+  public List<Cliente> findByCelular(String celular) {
+    return celular == null ? List.of() : clienteRepository.findByCelularContainingIgnoreCase(celular);
+  }
 }

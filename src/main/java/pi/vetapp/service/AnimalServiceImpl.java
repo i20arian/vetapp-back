@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import pi.vetapp.entity.Animal;
 import pi.vetapp.repository.AnimalRepository;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -163,5 +164,77 @@ public class AnimalServiceImpl implements AnimalService {
 
     animalesRepository.deleteById(id);
     return true;
+  }
+
+  @Override
+  public List<Animal> findByNombre(String nombre) {
+    if (nombre == null || nombre.isBlank()) {
+      return Collections.emptyList();
+    }
+
+    return animalesRepository.findByNombreContainingIgnoreCase(nombre);
+  }
+
+  @Override
+  public List<Animal> findByTipo(String tipo) {
+    if (tipo == null || tipo.isBlank()) {
+      return Collections.emptyList();
+    }
+
+    return animalesRepository.findByTipoContainingIgnoreCase(tipo);
+  }
+
+  @Override
+  public List<Animal> findByGenero(String genero) {
+    if (genero == null || genero.isBlank()) {
+      return Collections.emptyList();
+    }
+
+    return animalesRepository.findByGeneroContainingIgnoreCase(genero);
+  }
+
+  @Override
+  public List<Animal> findByEdad(Integer edad) {
+    if (edad == null) {
+      return Collections.emptyList();
+    }
+
+    return animalesRepository.findByEdad(edad);
+  }
+
+  @Override
+  public List<Animal> findByPeso(Double peso) {
+    if (peso == null) {
+      return Collections.emptyList();
+    }
+
+    return animalesRepository.findByPeso(peso);
+  }
+
+  @Override
+  public List<Animal> findByRaza(String raza) {
+    if (raza == null || raza.isBlank()) {
+      return Collections.emptyList();
+    }
+
+    return animalesRepository.findByRazaContainingIgnoreCase(raza);
+  }
+
+  @Override
+  public List<Animal> findByColor(String color) {
+    if (color == null || color.isBlank()) {
+      return Collections.emptyList();
+    }
+
+    return animalesRepository.findByColorContainingIgnoreCase(color);
+  }
+
+  @Override
+  public List<Animal> findByClienteId(Long clienteId) {
+    if (clienteId == null) {
+      return Collections.emptyList();
+    }
+
+    return animalesRepository.findByCliente_Id(clienteId);
   }
 }

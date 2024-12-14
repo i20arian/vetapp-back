@@ -31,7 +31,7 @@ public class HistoriaClinicaController {
         : new ResponseEntity<>(historiasClinicas, HttpStatus.OK);
   }
 
-  @PostMapping("/insertar")
+  @PostMapping("/crear")
   public ResponseEntity<HistoriaClinica> createHC(@RequestBody HistoriaClinica historiaClinica) {
     HistoriaClinica nuevaHistoriaClinica = historiaClinicaService.create(historiaClinica);
     return new ResponseEntity<>(nuevaHistoriaClinica, HttpStatus.CREATED);
@@ -47,7 +47,7 @@ public class HistoriaClinicaController {
     return new ResponseEntity<>(updatedHistoriaClinica.get(), HttpStatus.OK);
   }
 
-  @PutMapping("/actualizar-fecha-registro/{id}")
+  @PutMapping("/actualizar-fecha-registro-de/{id}")
   public ResponseEntity<HistoriaClinica> updateFechaRegistroHC(@PathVariable("id") Long id,
       @RequestBody LocalDate fechaDeRegistro) {
     Optional<HistoriaClinica> updatedHistoriaClinica = historiaClinicaService.updateFechaDeRegistro(id,
@@ -59,7 +59,7 @@ public class HistoriaClinicaController {
     return new ResponseEntity<>(updatedHistoriaClinica.get(), HttpStatus.OK);
   }
 
-  @PutMapping("/actualizar-hora-registro/{id}")
+  @PutMapping("/actualizar-hora-registro-de/{id}")
   public ResponseEntity<HistoriaClinica> updateHoraRegistroHC(@PathVariable("id") Long id,
       @RequestBody LocalTime horaDeRegistro) {
     Optional<HistoriaClinica> updatedHistoriaClinica = historiaClinicaService.updateHoraDeRegistro(id, horaDeRegistro);
@@ -70,7 +70,7 @@ public class HistoriaClinicaController {
     return new ResponseEntity<>(updatedHistoriaClinica.get(), HttpStatus.OK);
   }
 
-  @PutMapping("/actualizar-animal/{id}")
+  @PutMapping("/actualizar-animal-de/{id}")
   public ResponseEntity<HistoriaClinica> updateAnimalHC(@PathVariable("id") Long id, @RequestBody Animal animal) {
     Optional<HistoriaClinica> updatedHistoriaClinica = historiaClinicaService.updateAnimal(id, animal);
     if (updatedHistoriaClinica.isEmpty()) {
@@ -80,7 +80,7 @@ public class HistoriaClinicaController {
     return new ResponseEntity<>(updatedHistoriaClinica.get(), HttpStatus.OK);
   }
 
-  @PutMapping("/actualizar-cliente/{id}")
+  @PutMapping("/actualizar-cliente-de/{id}")
   public ResponseEntity<HistoriaClinica> updateClienteHC(@PathVariable("id") Long id, @RequestBody Cliente cliente) {
     Optional<HistoriaClinica> updatedHistoriaClinica = historiaClinicaService.updateCliente(id, cliente);
     if (updatedHistoriaClinica.isEmpty()) {
@@ -90,7 +90,7 @@ public class HistoriaClinicaController {
     return new ResponseEntity<>(updatedHistoriaClinica.get(), HttpStatus.OK);
   }
 
-  @PutMapping("/actualizar-medico/{id}")
+  @PutMapping("/actualizar-medico-de/{id}")
   public ResponseEntity<HistoriaClinica> updateMedicoHC(@PathVariable("id") Long id, @RequestBody Medico medico) {
     Optional<HistoriaClinica> updatedHistoriaClinica = historiaClinicaService.updateMedico(id, medico);
     if (updatedHistoriaClinica.isEmpty()) {
@@ -100,7 +100,7 @@ public class HistoriaClinicaController {
     return new ResponseEntity<>(updatedHistoriaClinica.get(), HttpStatus.OK);
   }
 
-  @GetMapping("/encontrar/{id}")
+  @GetMapping("/buscar-por-id/{id}")
   public ResponseEntity<HistoriaClinica> findByIDHC(@PathVariable("id") Long id) {
     Optional<HistoriaClinica> optAni = historiaClinicaService.findByID(id);
     if (optAni.isEmpty()) {
@@ -110,13 +110,78 @@ public class HistoriaClinicaController {
     return new ResponseEntity<>(optAni.get(), HttpStatus.OK);
   }
 
-  @DeleteMapping("/eliminar/{id}")
-  public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
+  @DeleteMapping("/eliminar-por-id/{id}")
+  public ResponseEntity<Void> deleteHC(@PathVariable("id") Long id) {
     boolean isDeleted = historiaClinicaService.delete(id);
     if (!isDeleted) {
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+  }
+
+  @GetMapping("/buscar-por-animal-id/{animalId}")
+  public ResponseEntity<List<HistoriaClinica>> findByAnimalIdHC(@PathVariable("animalId") Long animalId) {
+    List<HistoriaClinica> historiasClinicas = historiaClinicaService.findByAnimalId(animalId);
+    return historiasClinicas.isEmpty() ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
+        : new ResponseEntity<>(historiasClinicas, HttpStatus.OK);
+  }
+
+  @GetMapping("/buscar-por-cliente-id/{clienteId}")
+  public ResponseEntity<List<HistoriaClinica>> findByClienteIdHC(@PathVariable("clienteId") Long clienteId) {
+    List<HistoriaClinica> historiasClinicas = historiaClinicaService.findByClienteId(clienteId);
+    return historiasClinicas.isEmpty() ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
+        : new ResponseEntity<>(historiasClinicas, HttpStatus.OK);
+  }
+
+  @GetMapping("/buscar-por-medico-id/{medicoId}")
+  public ResponseEntity<List<HistoriaClinica>> findByMedicoIdHC(@PathVariable("medicoId") Long medicoId) {
+    List<HistoriaClinica> historiasClinicas = historiaClinicaService.findByMedicoId(medicoId);
+    return historiasClinicas.isEmpty() ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
+        : new ResponseEntity<>(historiasClinicas, HttpStatus.OK);
+  }
+
+  @GetMapping("/buscar-por-anio-fecha/{year}")
+  public ResponseEntity<List<HistoriaClinica>> findByYearOfFechaDeRegistroHC(@PathVariable("year") Integer year) {
+    List<HistoriaClinica> historiasClinicas = historiaClinicaService.findByYearOfFechaDeRegistro(year);
+    return historiasClinicas.isEmpty() ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
+        : new ResponseEntity<>(historiasClinicas, HttpStatus.OK);
+  }
+
+  @GetMapping("/buscar-por-mes-fecha/{month}")
+  public ResponseEntity<List<HistoriaClinica>> findByMonthOfFechaDeRegistroHC(@PathVariable("month") Integer month) {
+    List<HistoriaClinica> historiasClinicas = historiaClinicaService.findByMonthOfFechaDeRegistro(month);
+    return historiasClinicas.isEmpty() ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
+        : new ResponseEntity<>(historiasClinicas, HttpStatus.OK);
+  }
+
+  @GetMapping("/buscar-por-hora-fecha/{hour}")
+  public ResponseEntity<List<HistoriaClinica>> findByHourOfHoraDeRegistroHC(@PathVariable("hour") Integer hour) {
+    List<HistoriaClinica> historiasClinicas = historiaClinicaService.findByHourOfHoraDeRegistro(hour);
+    return historiasClinicas.isEmpty() ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
+        : new ResponseEntity<>(historiasClinicas, HttpStatus.OK);
+  }
+
+  @GetMapping("/buscar-por-minuto-fecha/{minute}")
+  public ResponseEntity<List<HistoriaClinica>> findByMinuteOfHoraDeRegistroHC(@PathVariable("minute") Integer minute) {
+    List<HistoriaClinica> historiasClinicas = historiaClinicaService.findByMinuteOfHoraDeRegistro(minute);
+    return historiasClinicas.isEmpty() ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
+        : new ResponseEntity<>(historiasClinicas, HttpStatus.OK);
+  }
+
+  @GetMapping("/buscar-por-fecha/{fechaDeRegistro}")
+  public ResponseEntity<List<HistoriaClinica>> findByFechaDeRegistroHC(
+      @PathVariable("fechaDeRegistro") LocalDate fechaDeRegistro) {
+    List<HistoriaClinica> historiasClinicas = historiaClinicaService.findByFechaDeRegistro(fechaDeRegistro);
+    return historiasClinicas.isEmpty() ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
+        : new ResponseEntity<>(historiasClinicas, HttpStatus.OK);
+  }
+
+  @GetMapping("/buscar-por-hora/{horaDeRegistro}")
+  public ResponseEntity<List<HistoriaClinica>> findByHoraDeRegistroHC(
+      @PathVariable("horaDeRegistro") LocalTime horaDeRegistro) {
+    List<HistoriaClinica> historiasClinicas = historiaClinicaService.findByHoraDeRegistro(horaDeRegistro);
+    return historiasClinicas.isEmpty() ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
+        : new ResponseEntity<>(historiasClinicas, HttpStatus.OK);
   }
 }

@@ -26,7 +26,7 @@ public class MedicoController {
         : new ResponseEntity<>(medicos, HttpStatus.OK);
   }
 
-  @PostMapping("/insertar")
+  @PostMapping("/crear")
   public ResponseEntity<Medico> createMed(@RequestBody Medico medico) {
     Medico nuevoMedico = medicoService.create(medico);
     return new ResponseEntity<>(nuevoMedico, HttpStatus.CREATED);
@@ -42,7 +42,7 @@ public class MedicoController {
     return new ResponseEntity<>(updatedMedico.get(), HttpStatus.OK);
   }
 
-  @PutMapping("/actualizar-nombres/{id}")
+  @PutMapping("/actualizar-nombres-de/{id}")
   public ResponseEntity<Medico> updateNombresMed(@PathVariable("id") Long id, @RequestBody String nombres) {
     Optional<Medico> updatedMedico = medicoService.updateNombres(id, nombres);
     if (updatedMedico.isEmpty()) {
@@ -52,7 +52,7 @@ public class MedicoController {
     return new ResponseEntity<>(updatedMedico.get(), HttpStatus.OK);
   }
 
-  @PutMapping("/actualizar-apellidos/{id}")
+  @PutMapping("/actualizar-apellidos-de/{id}")
   public ResponseEntity<Medico> updateApellidosMed(@PathVariable("id") Long id, @RequestBody String apellidos) {
     Optional<Medico> updatedMedico = medicoService.updateApellidos(id, apellidos);
     if (updatedMedico.isEmpty()) {
@@ -62,7 +62,7 @@ public class MedicoController {
     return new ResponseEntity<>(updatedMedico.get(), HttpStatus.OK);
   }
 
-  @PutMapping("/actualizar-especialidad/{id}")
+  @PutMapping("/actualizar-especialidad-de/{id}")
   public ResponseEntity<Medico> updateEspecialidadMed(@PathVariable("id") Long id,
       @RequestBody String especialidad) {
     Optional<Medico> updatedMedico = medicoService.updateEspecialidad(id, especialidad);
@@ -73,7 +73,7 @@ public class MedicoController {
     return new ResponseEntity<>(updatedMedico.get(), HttpStatus.OK);
   }
 
-  @PutMapping("/actualizar-dni/{id}")
+  @PutMapping("/actualizar-dni-de/{id}")
   public ResponseEntity<Medico> updateDniMed(@PathVariable("id") Long id, @RequestBody String dni) {
     Optional<Medico> updatedMedico = medicoService.updateDni(id, dni);
     if (updatedMedico.isEmpty()) {
@@ -83,7 +83,7 @@ public class MedicoController {
     return new ResponseEntity<>(updatedMedico.get(), HttpStatus.OK);
   }
 
-  @GetMapping("/encontrar/{id}")
+  @GetMapping("/buscar-por-id/{id}")
   public ResponseEntity<Medico> findByIDMed(@PathVariable("id") Long id) {
     Optional<Medico> optAni = medicoService.findByID(id);
     if (optAni.isEmpty()) {
@@ -93,7 +93,7 @@ public class MedicoController {
     return new ResponseEntity<>(optAni.get(), HttpStatus.OK);
   }
 
-  @DeleteMapping("/eliminar/{id}")
+  @DeleteMapping("/eliminar-por-id/{id}")
   public ResponseEntity<Void> deleteMed(@PathVariable("id") Long id) {
     boolean isDeleted = medicoService.delete(id);
     if (!isDeleted) {
@@ -101,5 +101,36 @@ public class MedicoController {
     }
 
     return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+  }
+
+  @GetMapping("/buscar-por-dni/{dni}")
+  public ResponseEntity<Medico> findByDniMed(@PathVariable("dni") String dni) {
+    Optional<Medico> optMedico = medicoService.findByDni(dni);
+    if (optMedico.isEmpty()) {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    return new ResponseEntity<>(optMedico.get(), HttpStatus.OK);
+  }
+
+  @GetMapping("/buscar-por-nombres/{nombres}")
+  public ResponseEntity<List<Medico>> findByNombresMed(@PathVariable("nombres") String nombres) {
+    List<Medico> medicos = medicoService.findByNombres(nombres);
+    return medicos.isEmpty() ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
+        : new ResponseEntity<>(medicos, HttpStatus.OK);
+  }
+
+  @GetMapping("/buscar-por-apellidos/{apellidos}")
+  public ResponseEntity<List<Medico>> findByApellidosMed(@PathVariable("apellidos") String apellidos) {
+    List<Medico> medicos = medicoService.findByApellidos(apellidos);
+    return medicos.isEmpty() ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
+        : new ResponseEntity<>(medicos, HttpStatus.OK);
+  }
+
+  @GetMapping("/buscar-por-especialidad/{especialidad}")
+  public ResponseEntity<List<Medico>> findByEspecialidadMed(@PathVariable("especialidad") String especialidad) {
+    List<Medico> medicos = medicoService.findByEspecialidad(especialidad);
+    return medicos.isEmpty() ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
+        : new ResponseEntity<>(medicos, HttpStatus.OK);
   }
 }

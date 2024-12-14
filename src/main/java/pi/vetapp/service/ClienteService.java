@@ -29,4 +29,18 @@ public interface ClienteService {
   Optional<Cliente> findByID(Long id);
 
   boolean delete(Long id);
+
+  Optional<Cliente> findByDni(String dni);
+
+  Optional<Cliente> findByCorreo(String correo);
+
+  List<Cliente> findByNombres(String nombres);
+
+  List<Cliente> findByApellidos(String apellidos);
+
+  List<Cliente> findByGenero(String genero);
+
+  List<Cliente> findByDireccion(String direccion);
+
+  List<Cliente> findByCelular(String celular);
 }

@@ -23,4 +23,12 @@ public interface MedicoService {
   Optional<Medico> findByID(Long id);
 
   boolean delete(Long id);
+
+  List<Medico> findByNombres(String nombres);
+
+  List<Medico> findByApellidos(String apellidos);
+
+  List<Medico> findByEspecialidad(String especialidad);
+
+  Optional<Medico> findByDni(String dni);
 }

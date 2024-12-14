@@ -38,4 +38,8 @@ public class Animal {
 
   @Column(name = "color_ani", length = 32)
   private String color;
+
+  @ManyToOne
+  @JoinColumn(name = "id_cli", nullable = false)
+  private Cliente cliente;
 }
