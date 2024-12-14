@@ -30,4 +30,22 @@ public interface HistoriaClinicaService {
   Optional<HistoriaClinica> findByID(Long id);
 
   boolean delete(Long id);
+
+  List<HistoriaClinica> findByAnimalId(Long animalId);
+
+  List<HistoriaClinica> findByClienteId(Long clienteId);
+
+  List<HistoriaClinica> findByMedicoId(Long medicoId);
+
+  List<HistoriaClinica> findByYearOfFechaDeRegistro(Integer year);
+
+  List<HistoriaClinica> findByMonthOfFechaDeRegistro(Integer month);
+
+  List<HistoriaClinica> findByHourOfHoraDeRegistro(Integer hour);
+
+  List<HistoriaClinica> findByMinuteOfHoraDeRegistro(Integer minute);
+
+  List<HistoriaClinica> findByFechaDeRegistro(LocalDate fechaDeRegistro);
+
+  List<HistoriaClinica> findByHoraDeRegistro(LocalTime horaDeRegistro);
 }

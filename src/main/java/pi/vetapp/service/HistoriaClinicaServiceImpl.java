@@ -138,4 +138,85 @@ public class HistoriaClinicaServiceImpl implements HistoriaClinicaService {
     historiaClinicaRepository.deleteById(id);
     return true;
   }
+
+  @Override
+  public List<HistoriaClinica> findByAnimalId(Long animalId) {
+    if (animalId == null) {
+      return List.of();
+    }
+
+    return historiaClinicaRepository.findByAnimalId(animalId);
+  }
+
+  @Override
+  public List<HistoriaClinica> findByClienteId(Long clienteId) {
+    if (clienteId == null) {
+      return List.of();
+    }
+
+    return historiaClinicaRepository.findByClienteId(clienteId);
+  }
+
+  @Override
+  public List<HistoriaClinica> findByMedicoId(Long medicoId) {
+    if (medicoId == null) {
+      return List.of();
+    }
+
+    return historiaClinicaRepository.findByMedicoId(medicoId);
+  }
+
+  @Override
+  public List<HistoriaClinica> findByYearOfFechaDeRegistro(Integer year) {
+    if (year == null) {
+      return List.of();
+    }
+
+    return historiaClinicaRepository.findByYearOfFechaDeRegistro(year);
+  }
+
+  @Override
+  public List<HistoriaClinica> findByMonthOfFechaDeRegistro(Integer month) {
+    if (month == null || month < 1 || month > 12) {
+      return List.of();
+    }
+
+    return historiaClinicaRepository.findByMonthOfFechaDeRegistro(month);
+  }
+
+  @Override
+  public List<HistoriaClinica> findByHourOfHoraDeRegistro(Integer hour) {
+    if (hour == null || hour < 0 || hour > 23) {
+      return List.of();
+    }
+
+    return historiaClinicaRepository.findByHourOfHoraDeRegistro(hour);
+  }
+
+  @Override
+  public List<HistoriaClinica> findByMinuteOfHoraDeRegistro(Integer minute) {
+    if (minute == null || minute < 0 || minute > 59) {
+      return List.of();
+    }
+
+    return historiaClinicaRepository.findByMinuteOfHoraDeRegistro(minute);
+  }
+
+  @Override
+  public List<HistoriaClinica> findByFechaDeRegistro(LocalDate fechaDeRegistro) {
+    if (fechaDeRegistro == null) {
+      return List.of();
+    }
+
+    return historiaClinicaRepository.findByFechaDeRegistro(fechaDeRegistro);
+  }
+
+  @Override
+  public List<HistoriaClinica> findByHoraDeRegistro(LocalTime horaDeRegistro) {
+    if (horaDeRegistro == null) {
+      return List.of();
+    }
+
+    return historiaClinicaRepository.findByHoraDeRegistro(horaDeRegistro);
+  }
 }
