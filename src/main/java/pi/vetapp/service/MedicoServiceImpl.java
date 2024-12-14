@@ -115,4 +115,24 @@ public class MedicoServiceImpl implements MedicoService {
     doctorRepository.deleteById(id);
     return true;
   }
+
+  @Override
+  public Optional<Medico> findByDni(String dni) {
+    return dni == null ? Optional.empty() : doctorRepository.findByDni(dni);
+  }
+
+  @Override
+  public List<Medico> findByNombres(String nombres) {
+    return nombres == null ? List.of() : doctorRepository.findByNombresContainingIgnoreCase(nombres);
+  }
+
+  @Override
+  public List<Medico> findByApellidos(String apellidos) {
+    return apellidos == null ? List.of() : doctorRepository.findByApellidosContainingIgnoreCase(apellidos);
+  }
+
+  @Override
+  public List<Medico> findByEspecialidad(String especialidad) {
+    return especialidad == null ? List.of() : doctorRepository.findByEspecialidadContainingIgnoreCase(especialidad);
+  }
 }
