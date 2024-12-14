@@ -26,7 +26,7 @@ public class ClienteController {
         : new ResponseEntity<>(clientes, HttpStatus.OK);
   }
 
-  @PostMapping("/insertar")
+  @PostMapping("/crear")
   public ResponseEntity<Cliente> createCli(@RequestBody Cliente cliente) {
     Cliente nuevoCliente = clienteService.create(cliente);
     return new ResponseEntity<>(nuevoCliente, HttpStatus.CREATED);
@@ -42,7 +42,7 @@ public class ClienteController {
     return new ResponseEntity<>(optCli.get(), HttpStatus.OK);
   }
 
-  @PutMapping("/actualizar-nombres/{id}")
+  @PutMapping("/actualizar-nombres-de/{id}")
   public ResponseEntity<Cliente> updateNombresCli(@PathVariable("id") Long id, @RequestBody String nombres) {
     Optional<Cliente> optCli = clienteService.updateNombres(id, nombres);
     if (optCli.isEmpty()) {
@@ -52,7 +52,7 @@ public class ClienteController {
     return new ResponseEntity<>(optCli.get(), HttpStatus.OK);
   }
 
-  @PutMapping("/actualizar-apellidos/{id}")
+  @PutMapping("/actualizar-apellidos-de/{id}")
   public ResponseEntity<Cliente> updateApellidosCli(@PathVariable("id") Long id, @RequestBody String apellidos) {
     Optional<Cliente> optCli = clienteService.updateApellidos(id, apellidos);
     if (optCli.isEmpty()) {
@@ -62,7 +62,7 @@ public class ClienteController {
     return new ResponseEntity<>(optCli.get(), HttpStatus.OK);
   }
 
-  @PutMapping("/actualizar-dni/{id}")
+  @PutMapping("/actualizar-dni-de/{id}")
   public ResponseEntity<Cliente> updateDniCli(@PathVariable("id") Long id, @RequestBody String dni) {
     Optional<Cliente> optCli = clienteService.updateDni(id, dni);
     if (optCli.isEmpty()) {
@@ -72,7 +72,7 @@ public class ClienteController {
     return new ResponseEntity<>(optCli.get(), HttpStatus.OK);
   }
 
-  @PutMapping("/actualizar-genero/{id}")
+  @PutMapping("/actualizar-genero-de/{id}")
   public ResponseEntity<Cliente> updateGeneroCli(@PathVariable("id") Long id, @RequestBody String genero) {
     Optional<Cliente> optCli = clienteService.updateGenero(id, genero);
     if (optCli.isEmpty()) {
@@ -82,7 +82,7 @@ public class ClienteController {
     return new ResponseEntity<>(optCli.get(), HttpStatus.OK);
   }
 
-  @PutMapping("/actualizar-correo/{id}")
+  @PutMapping("/actualizar-correo-de/{id}")
   public ResponseEntity<Cliente> updateCorreoCli(@PathVariable("id") Long id, @RequestBody String correo) {
     Optional<Cliente> optCli = clienteService.updateCorreo(id, correo);
     if (optCli.isEmpty()) {
@@ -92,7 +92,7 @@ public class ClienteController {
     return new ResponseEntity<>(optCli.get(), HttpStatus.OK);
   }
 
-  @PutMapping("/actualizar-celular/{id}")
+  @PutMapping("/actualizar-celular-de/{id}")
   public ResponseEntity<Cliente> updateCelularCli(@PathVariable("id") Long id, @RequestBody String celular) {
     Optional<Cliente> optCli = clienteService.updateCelular(id, celular);
     if (optCli.isEmpty()) {
@@ -102,7 +102,7 @@ public class ClienteController {
     return new ResponseEntity<>(optCli.get(), HttpStatus.OK);
   }
 
-  @PutMapping("/actualizar-direccion/{id}")
+  @PutMapping("/actualizar-direccion-de/{id}")
   public ResponseEntity<Cliente> updateDireccionCli(@PathVariable("id") Long id, @RequestBody String direccion) {
     Optional<Cliente> optCli = clienteService.updateDireccion(id, direccion);
     if (optCli.isEmpty()) {
@@ -112,7 +112,7 @@ public class ClienteController {
     return new ResponseEntity<>(optCli.get(), HttpStatus.OK);
   }
 
-  @GetMapping("/encontrar/{id}")
+  @GetMapping("/buscar-por-id/{id}")
   public ResponseEntity<Cliente> findByIDCli(@PathVariable("id") Long id) {
     Optional<Cliente> optAni = clienteService.findByID(id);
     if (optAni.isEmpty()) {
@@ -122,7 +122,7 @@ public class ClienteController {
     return new ResponseEntity<>(optAni.get(), HttpStatus.OK);
   }
 
-  @DeleteMapping("/eliminar/{id}")
+  @DeleteMapping("/eliminar-por-id/{id}")
   public ResponseEntity<Void> deleteCli(@PathVariable("id") Long id) {
     boolean isDeleted = clienteService.delete(id);
     if (!isDeleted) {
@@ -130,5 +130,54 @@ public class ClienteController {
     }
 
     return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+  }
+
+  @GetMapping("/buscar-por-dni/{dni}")
+  public ResponseEntity<Cliente> findByDniCli(@PathVariable("dni") String dni) {
+    Optional<Cliente> optCli = clienteService.findByDni(dni);
+    return optCli.map(cliente -> new ResponseEntity<>(cliente, HttpStatus.OK))
+        .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+  }
+
+  @GetMapping("/buscar-por-correo/{correo}")
+  public ResponseEntity<Cliente> findByCorreoCli(@PathVariable("correo") String correo) {
+    Optional<Cliente> optCli = clienteService.findByCorreo(correo);
+    return optCli.map(cliente -> new ResponseEntity<>(cliente, HttpStatus.OK))
+        .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+  }
+
+  @GetMapping("/buscar-por-nombres/{nombres}")
+  public ResponseEntity<List<Cliente>> findByNombresCli(@PathVariable("nombres") String nombres) {
+    List<Cliente> clientes = clienteService.findByNombres(nombres);
+    return clientes.isEmpty() ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
+        : new ResponseEntity<>(clientes, HttpStatus.OK);
+  }
+
+  @GetMapping("/buscar-por-apellidos/{apellidos}")
+  public ResponseEntity<List<Cliente>> findByApellidosCli(@PathVariable("apellidos") String apellidos) {
+    List<Cliente> clientes = clienteService.findByApellidos(apellidos);
+    return clientes.isEmpty() ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
+        : new ResponseEntity<>(clientes, HttpStatus.OK);
+  }
+
+  @GetMapping("/buscar-por-genero/{genero}")
+  public ResponseEntity<List<Cliente>> findByGeneroCli(@PathVariable("genero") String genero) {
+    List<Cliente> clientes = clienteService.findByGenero(genero);
+    return clientes.isEmpty() ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
+        : new ResponseEntity<>(clientes, HttpStatus.OK);
+  }
+
+  @GetMapping("/buscar-por-direccion/{direccion}")
+  public ResponseEntity<List<Cliente>> findByDireccionCli(@PathVariable("direccion") String direccion) {
+    List<Cliente> clientes = clienteService.findByDireccion(direccion);
+    return clientes.isEmpty() ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
+        : new ResponseEntity<>(clientes, HttpStatus.OK);
+  }
+
+  @GetMapping("/buscar-por-celular/{celular}")
+  public ResponseEntity<List<Cliente>> findByCelularCli(@PathVariable("celular") String celular) {
+    List<Cliente> clientes = clienteService.findByCelular(celular);
+    return clientes.isEmpty() ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
+        : new ResponseEntity<>(clientes, HttpStatus.OK);
   }
 }
