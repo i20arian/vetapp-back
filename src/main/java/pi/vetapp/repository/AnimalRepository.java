@@ -3,6 +3,8 @@ package pi.vetapp.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import pi.vetapp.entity.Animal;
 
@@ -22,5 +24,6 @@ public interface AnimalRepository extends JpaRepository<Animal, Long> {
 
   List<Animal> findByColorContainingIgnoreCase(String color);
 
-  List<Animal> findByCliente_Id(Long clienteId);
+  @Query("SELECT a FROM Animal a JOIN HistoriaClinica hc ON a.id = hc.animal.id WHERE hc.cliente.id = :clienteId")
+  List<Animal> findByClienteId(@Param("clienteId") Long clienteId);
 }

@@ -235,6 +235,6 @@ public class AnimalServiceImpl implements AnimalService {
       return Collections.emptyList();
     }
 
-    return animalesRepository.findByCliente_Id(clienteId);
+    return animalesRepository.findByClienteId(clienteId);
   }
 }

@@ -34,6 +34,18 @@ public class HistoriaClinica {
   @Column(name = "hora_registro_hc", nullable = false)
   private LocalTime horaDeRegistro;
 
+  @Column(name = "diagnostico_hc", length = 512)
+  private String diagnostico;
+
+  @Column(name = "tratamiento_hc", length = 512)
+  private String tratamiento;
+
+  @Column(name = "vacunas_aplicadas_hc", length = 512)
+  private String vacunasAplicadas;
+
+  @Column(name = "observaciones_hc", length = 512)
+  private String observaciones;
+
   @ManyToOne
   @JoinColumn(name = "id_ani", nullable = false)
   private Animal animal;
